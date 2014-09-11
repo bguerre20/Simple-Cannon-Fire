@@ -6,19 +6,18 @@ int main(int argc, char* argv[]) {
 	double angle = 0, gunpowder = 0, distance = 0, velocity = 0, shot = 0;
 	int seed = 0, win = 0;
 
+	//Basic error checking for seed value, assuming numbers only, get seed value
+	while(seed <=0) {
+		cout<<"Please enter a positive integer seed value:"<<endl;
+		cin>>seed;
+	}
+	srand(seed);
+	rand();
+	distance = (double)rand() / (RAND_MAX + 1) * 1000;
+	cout<<"The Target is: " << distance << "m away."<<endl;
+
 	//Over-arking game loop, wont exit until win condition is met
 	while(win == 0) {
-
-		//Basic error checking for seed value, assuming numbers only, get seed value
-		while(seed <=0) {
-			cout<<"Please enter a positive integer seed value:"<<endl;
-			cin>>seed;
-		}
-		srand(seed);
-		rand();
-		distance = (double)rand() / (RAND_MAX + 1) * 1000;
-		cout<<"The Target is: " << distance << "m away."<<endl;
-
 		////Basic error checking for angle value, assuming numbers only, get angle and convert to radians
 		while(angle <=0) {
 			cout<<"Please enter an angle between 0 and 90:"<<endl;
@@ -31,7 +30,7 @@ int main(int argc, char* argv[]) {
 			cout<<"Please enter an amount of gunpowder in kilograms:"<<endl;
 			cin>>gunpowder;
 		}
-		
+
 		//calculate velocity and shot , then compare to win zone, terminate loop if win, else continue playing
 		velocity = gunpowder * 50;
 		shot = (((velocity * sin(angle)) / 9.8 ) * 2 ) * (velocity * cos(angle));
@@ -49,13 +48,12 @@ int main(int argc, char* argv[]) {
 
 		//clear variables just in case we keep playing
 		cin.clear();
-		angle = 0, gunpowder = 0, distance = 0, velocity = 0, shot = 0;
-		seed = 0;
+		angle = 0, gunpowder = 0, velocity = 0, shot = 0;
 	}	
 
 	return 0;
 
-	 
+
 }
 
 
